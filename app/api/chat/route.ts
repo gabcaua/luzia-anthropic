@@ -133,17 +133,17 @@ export async function POST(req: Request, res: Response) {
       (1.): Se a notícia, afirmação ou informação for 100% verdadeira, a IA deverá substituir "text" por "Isso é um fato." somente se a informação ("{input}") for verdadeira, substituir "percentage" pela porcentagem de certeza da IA, politicalbiasOfTheNarrativePercent (se a notícia provém de estratégia política) pelo percentual detectado de viés de informação, manipulação ou intenção de convencer detectada pela análise linguística da IA, listOfSuspectWordsLanguageAnalysis pela lista de palavras-chaves comumente usadas para ALARMAR e CONTORNAR/EVITAR o nosso pensamento crítico e troque "listOfSearchEngines" por uma lista com o nome dos sites, jornais, revistas, canais do YouTube, entre outros que falaram sobre essa notícia/afirmação. SUBSTITUA "listOfTheMainLinksExtractedFromGoogleJSON" por uma lista dos URLS extraidos do JSON na busca google. Esse JSON é sua fonte de informações. Após os links, pare de escrever
       # (2.): Caso a notícia seja falsa, a IA deverá substituir "text" por "⚠️ Cuidado! Isso é uma fake news." e siga a estrutura a seguir:
       
-      \n\n* # A estrutura de respostas da IA para essas situações envolvendo notícias seguirá sempre esse padrão: ""text"  ·  [ "percentage"% de certeza ]\nChance de Viés Político: "politicalbiasOfTheNarrativePercent"%\nPalavras suspeitas: "listOfSuspectWordsLanguageAnalysis"\nFontes: (listOfSearchEngines)"\nLinks:\n- (listOfTheMainLinksExtractedFromGoogleJSON)\n© Luzia, de Cauã Gabriel, 2023."\n\n  
+      \n\n* # A estrutura de respostas da IA para essas situações envolvendo notícias seguirá sempre esse padrão: "🤔 Hmm...\n"text"  ·  [ "percentage"% de certeza ]\nChance de Viés Político: "politicalbiasOfTheNarrativePercent"%\nPalavras suspeitas: "listOfSuspectWordsLanguageAnalysis"\nFontes: (listOfSearchEngines)"\nLinks:\n- (listOfTheMainLinksExtractedFromGoogleJSON)\n© Luzia, de Cauã Gabriel, 2023."\n\n  
 
       --- Se a fala do Humano ("${latestMessage}") não for uma notícia, afirmação ou dúvida sobre a verdade, você responderá diretamente e normalmente com a personalidade de Luiza. Caso contrário, siga a estrutura acima ---
       
-      System: NÃO MENCIONAR ESTE JSON AO USUÁRIO (HUMAN). Pesquisa Google para auxiliar Luzia a procurar por denúncias sobre uma notícia: O resultado da pesquisa está comprimido em JSON: \`\`\`Google: ${JSON.stringify(searchResults, null, 0)}\`\`\`
+      System: Aqui vai um JSON com uma pesquisa no Google para auxiliar Luzia a procurar por denúncias sobre uma notícia: O resultado da pesquisa está comprimido em JSON: \`\`\`Google: ${JSON.stringify(searchResults, null, 0)}\`\`\`
       \n\n
 
-      Human: "${argForExecutor}" --> Detecte se isso foi uma mensagem normal ou um pedido de análise de notícias/afirmações/dúvida_sobre_a_verdade e faça a abordagem necessária. Siga o roteiro, Luzia. 
+      Human: Manchete: "${argForExecutor}" --> Detecte se isso foi uma mensagem normal ou um pedido de análise de notícias/afirmações/dúvida_sobre_a_verdade e faça a abordagem necessária. Siga o roteiro, Luzia. 
 
 
-      Assistant:Resposta adequada ao humano:\n`);
+      Assistant:Resposta adequada ao humano:\n🤔`);
     const chunks: string[] = result.split(" ");
     const responseStream = new ReadableStream({
       async start(controller) {

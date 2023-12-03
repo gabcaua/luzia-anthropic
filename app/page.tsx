@@ -118,7 +118,7 @@ function VectorSelector({ onSelectVectorStorage }) {
 }
 
 // 13. Define main App component
-export deult function App() {
+export default function App() {
   // 14. Initialize state variables
   const [showWelcomeBack, setShowWelcomeBack] = useState(true);
   const [isInputFocused, setInputFocused] = useState(false);
@@ -168,7 +168,7 @@ export deult function App() {
   // 21. Attach keydown event listener
   useEffect(() => {
     let arr: Array<String>
-    arr = ["conferir", "checar", "pesquisar", "detectar", "pensar"];
+    arr = ["conferir", "checar", "pesquisar", "detectar", "pensar", "responder", "julgar"];
     let item: any
     item = document.querySelector("span#typedStr.animate-pulse.typedStr")
     setInterval(() => {
