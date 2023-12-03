@@ -17,22 +17,17 @@ import {
 function ModelSelector({ onSelectModel }) {
   // 3. Initialize state for the currentModel
   const [currentModel, setCurrentModel] = useState({
-    model: "claude-2-100k",
-    src: "anthropic-logo.png",
-    alt: "Anthropic Logo",
+    model: "claude-2.1",
+    src: "luzia-logo.png",
+    alt: "LuzIA Logo",
   });
 
   // 4. Define modelSelection array
   const modelSelection = [
     {
-      model: "claude-2-100k",
-      src: "anthropic-logo.png",
-      alt: "Anthropic Logo",
-    },
-    {
-      model: "gpt-3.5",
-      src: "openai-logo.png",
-      alt: "OpenAI Logo",
+      model: "claude-2.1",
+      src: "luzia-logo.png",
+      alt: "LuzIA Logo",
     },
   ];
 
@@ -73,7 +68,7 @@ function WelcomeBack() {
   return (
     <>
       <h1 className="text-center tracking-tighter mt-8 mb-8 sm:mb-12 text-5xl">
-        Welcome back <span className="animate-pulse">🦜</span>
+        A <strong>Luzia</strong> pode...<br /><strong><span className="animate-pulse typedStr" id="typedStr">checar</span></strong> pra você. <span className="animate-pulse text-5xl font-bold">🧐</span>
       </h1>
     </>
   );
@@ -123,7 +118,7 @@ function VectorSelector({ onSelectVectorStorage }) {
 }
 
 // 13. Define main App component
-export default function App() {
+export deult function App() {
   // 14. Initialize state variables
   const [showWelcomeBack, setShowWelcomeBack] = useState(true);
   const [isInputFocused, setInputFocused] = useState(false);
@@ -172,6 +167,13 @@ export default function App() {
 
   // 21. Attach keydown event listener
   useEffect(() => {
+    let arr: Array<String>
+    arr = ["conferir", "checar", "pesquisar", "detectar", "pensar"];
+    let item: any
+    item = document.querySelector("span#typedStr.animate-pulse.typedStr")
+    setInterval(() => {
+    if (item?.textContent) item.textContent = arr[Math.floor(Math.random() * arr.length)]
+    }, 1_300)
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
@@ -226,61 +228,60 @@ export default function App() {
       <ModelSelector onSelectModel={handleModelSelection} />
       {/* 27. Position input bar conditionally on whether it is the welcome screen */}
       <div
-        className={`max-w-3xl w-full fixed overflow-y-auto ${
-          showWelcomeBack ? "top-28" : "bottom-0"
-        } mx-auto left-1/2 -translate-x-1/2`}
+        className={`max-w-3xl w-full fixed overflow-y-auto ${showWelcomeBack ? "top-28" : "bottom-0"
+          } mx-auto left-1/2 -translate-x-1/2`}
       >
         {showWelcomeBack && <WelcomeBack />}
         {messages.length > 0 && !showWelcomeBack
           ? messages.map((m, index) => (
-              //  28. Conditional rendering based on user or assistant
-              <div key={m.id} className="mr-3">
-                {m.role === "user" ? (
-                  <>
-                    {/* 29. User message display */}
-                    <div className="flex justify-end">
-                      <div className="flex items-end col-start-3 pb-1 mx-2 opacity-100 transform-none">
-                        <div className="rounded-xl px-3 py-2 break-words text-stone-900 transition-all bg-white place-self-end ">
-                          <div className="contents">
-                            <p className="whitespace-pre-wrap">{m.content}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <div className="flex items-end col-start-3 pb-1 mx-2 opacity-100 transform-none">
-                        {/* 30. User avatar */}
-                        <div className="font-bold rounded-full flex items-center justify-center h-8 w-8 text-[14px] bg-ant-primary text-white bg-purple-800">
-                          <User size={18} />
+            //  28. Conditional rendering based on user or assistant
+            <div key={m.id} className="mr-3">
+              {m.role === "user" ? (
+                <>
+                  {/* 29. User message display */}
+                  <div className="flex justify-end overflow-auto">
+                    <div className="flex items-end col-start-3 pb-1 mx-2 opacity-100 transform-none">
+                      <div className="rounded-xl px-3 py-2 break-words text-stone-900 transition-all bg-white place-self-end ">
+                        <div className="contents">
+                          <p className="whitespace-pre-wrap">{m.content}</p>
                         </div>
                       </div>
                     </div>
-                  </>
-                ) : (
-                  <>
-                    {/* 31. Assistant message display */}
-                    <div className="flex justify-start my-2">
-                      <div
-                        className="font-bold rounded-full flex items-center justify-center mx-2 h-8 w-8 text-[14px] bg-white text-whitemx-2 
+                    <div className="flex items-end col-start-3 pb-1 mx-2 opacity-100 transform-none">
+                      {/* 30. User avatar */}
+                      <div className="font-bold rounded-full flex items-center justify-center h-8 w-8 text-[14px] bg-ant-primary text-white bg-purple-800">
+                        <User size={18} />
+                      </div>
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <>
+                  {/* 31. Assistant message display */}
+                  <div className="flex justify-start my-2 overflow-auto">
+                    <div
+                      className="font-bold rounded-full flex items-center justify-center mx-2 h-8 w-8 text-[14px] bg-white text-whitemx-2 
                     mt-0.5"
+                    >
+                      🧐
+                    </div>
+                    <div className="col-start-2 grid gap-2 opacity-100 transform-none">
+                      {/* 32. Assistant message content */}
+                      <div
+                        className={`ReactMarkdown rounded-xl px-3 py-2 break-words text-stone-900 transition-all pb-1 grid gap-3 grid-cols-1 max-w-[75ch] bg-white place-self-start`}
                       >
-                        🦜
-                      </div>
-                      <div className="col-start-2 grid gap-2 opacity-100 transform-none">
-                        {/* 32. Assistant message content */}
-                        <div
-                          className={`ReactMarkdown rounded-xl px-3 py-2 break-words text-stone-900 transition-all pb-1 grid gap-3 grid-cols-1 max-w-[75ch] bg-white place-self-start`}
-                        >
-                          <div className="contents">
-                            <p className="whitespace-pre-wrap">{m.content}</p>
-                          </div>
+                        <div className="contents">
+                          <p className="whitespace-pre-wrap">{m.content}</p>
                         </div>
                       </div>
                     </div>
-                  </>
-                )}
-              </div>
-            ))
+                  </div>
+                </>
+              )}
+            </div>
+          ))
           : null}
-        <div className="bg-white rounded-md py-2 px-2 m-3">
+        <div className="bg-white rounded-md py-2 px-2 m-3 mb-1">
           <fieldset className="sm:sticky sm:z-10 grid sm:pr-3 sm:grid-flow-col sm:grid-cols-[minmax(0,_1fr)_aufto] sm:gap-2 w-full rounded-3xl top-4 backdrop-blur-xl bg-white disabled:bg-white/50">
             <form
               onSubmit={(e) => {
@@ -313,9 +314,8 @@ export default function App() {
                         style={{ display: "none" }}
                       />
                       <span
-                        className={`mr-2 pt-0.5 text-center ${
-                          icon.active ? "border-black" : "border-black"
-                        }`}
+                        className={`mr-2 pt-0.5 text-center ${icon.active ? "border-black" : "border-black"
+                          }`}
                       >
                         {/* 34. Check or circle icon based on function state */}
                         {icon.active ? (
@@ -335,7 +335,7 @@ export default function App() {
                 onBlur={handleInputBlur}
                 className="p-1.5 resize-none focus:outline-none w-full h-8"
                 value={input}
-                placeholder="Message..."
+                placeholder="Me dê uma manchete."
                 onChange={handleInputChange}
                 name="message"
                 autoComplete="off"
@@ -361,13 +361,12 @@ export default function App() {
               {selectedModel === "gpt-3.5" ? (
                 <label>
                   <div onClick={() => setShowSlideUp(!showSlideUp)}>
-                    <button className="w-full flex items-center bg-uivory-100 py-2 px-2 rounded-full cursor-pointer shadow transition-all ease-in-out active:scale-[0.98] text-ellipsis whitespace-nowrap overflow-x-hidden text-sm">
+                    <button className="w-full flex items-center bg-uivory-100 py-2 px-2 rounded-full cursor-pointer shadow transition-all ease-in-out active:scale-[0.98] text-ellipsis whitespace-nowrap overflow-x-hidden text-sm hidden">
                       <div
-                        className={`sc-imALrc jyzrrZ grid place-items-center w-5 h-5 ${
-                          functions.some((func) => func.active)
-                            ? "text-green-500 animate-pulse"
-                            : "text-black"
-                        }`}
+                        className={`sc-imALrc jyzrrZ grid place-items-center w-5 h-5 ${functions.some((func) => func.active)
+                          ? "text-green-500 animate-pulse"
+                          : "text-black"
+                          }`}
                       >
                         <Function size={18} />
                       </div>
@@ -391,8 +390,8 @@ export default function App() {
               </label>
               {/* 39. Start new chat button */}
               <div>
-                <button className="w-full flex items-center bg-purple-800 text-white py-2 px-2 rounded-full cursor-pointer shadow transition-all ease-in-out active:scale-[0.98] text-ellipsis whitespace-nowrap overflow-x-hidden text-sm">
-                  {showWelcomeBack ? "Start a new Chat" : ""}
+                <button className="w-full flex items-center bg-purple-800 text-white py-2 px-2 rounded-full cursor-pointer shadow transition-all ease-in-out active:scale-[0.98] text-ellipsis whitespace-nowrap overflow-x-hidden text-sm font-bold">
+                  {showWelcomeBack ? "ﾠConfira a verdadeﾠ" : ""}
                   <div className="grid place-items-center w-5 h-5">
                     <ArrowFatRight size={18} />
                   </div>
@@ -446,11 +445,11 @@ export default function App() {
         </div>
         <div
           className="flex justify-end text-xs text-stone-400 delay-100 duration-500 transition-opacity mx-4"
-          style={{ visibility: isInputFocused ? "visible" : "hidden" }}
+          style={{ visibility: isInputFocused ? "visible" : "visible" }}
         >
           {/* 46. Keyboard shortcuts info */}
-          <strong>⏎</strong> to send, <strong>shift + ⏎</strong> to add a new
-          line, <strong>⌘K</strong> to create a new chat
+          <strong>⏎</strong>ㅤpara enviar.ㅤ<strong>shift + ⏎ㅤ</strong> para descer de linha
+          , <strong>ㅤ⌘Kㅤ</strong>cria nova conversa.
         </div>
       </div>
     </>
