@@ -13,6 +13,7 @@
     "@phosphor-icons/react": "^2.0.10",
     "@pinecone-database/pinecone": "^0.1.6",
     "@supabase/supabase-js": "^2.32.0",
+    "@tailwindcss/typography": "^0.5.10",
     "ai": "2.1.32",
     "bufferutil": "^4.0.8",
     "busboy": "^1.6.0",

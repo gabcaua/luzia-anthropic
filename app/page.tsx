@@ -271,7 +271,7 @@ export default function App() {
                         className={`ReactMarkdown rounded-xl px-3 py-2 break-words text-stone-900 transition-all pb-1 grid gap-3 grid-cols-1 max-w-[75ch] bg-white place-self-start`}
                       >
                         <div className="contents">
-                          <p className="whitespace-pre-wrap">{m.content}</p>
+                          <p className="ReactMarkdown whitespace-pre-wrap">{m.content}</p>
                         </div>
                       </div>
                     </div>
@@ -302,7 +302,7 @@ export default function App() {
                   {functions.map((icon, index) => (
                     <label
                       key={index}
-                      className="flex items-centerpy-0.5 px-0.5 rounded-full cursor-pointer transition-all ease-in-out text-sm"
+                      className="flex items-center py-0.5 px-0.5 rounded-full cursor-pointer transition-all ease-in-out text-sm"
                     >
                       {/* 33. Checkbox for functions */}
                       <input
@@ -338,7 +338,7 @@ export default function App() {
                 placeholder="Me dê uma manchete."
                 onChange={handleInputChange}
                 name="message"
-                autoComplete="off"
+                autoComplete="on"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault(); // Prevent new line
@@ -444,12 +444,26 @@ export default function App() {
           </div>
         </div>
         <div
-          className="flex justify-end text-xs text-stone-400 delay-100 duration-500 transition-opacity mx-4"
+          className="flex justify-end text-xs text-stone-400 delay-100 duration-500 transition-opacity mx-4 pb-8"
           style={{ visibility: isInputFocused ? "visible" : "visible" }}
         >
           {/* 46. Keyboard shortcuts info */}
           <strong>⏎</strong>ㅤpara enviar.ㅤ<strong>shift + ⏎ㅤ</strong> para descer de linha
           , <strong>ㅤ⌘Kㅤ</strong>cria nova conversa.
+        </div>
+        <div
+          className="flex justify-center text-mg text-stone-600 delay-100 duration-500 transition-opacity mx-4 "
+          style={{ display: showWelcomeBack ? "flex" : "none" }}
+        >
+          {/* 46. Keyboard shortcuts info */}
+          <a href="https://www.cgsilva.com.br">Desenvolvida por Cauã Gabriel.</a>
+        </div>
+        <div
+          className="flex justify-center text-mg text-stone-600 delay-100 duration-500 transition-opacity mx-4 "
+          style={{ display: showWelcomeBack ? "flex" : "none" }}
+        >
+          {/* 46. Keyboard shortcuts info */}
+          <strong>Antes de repassar, vamos checar.</strong>
         </div>
       </div>
     </>
