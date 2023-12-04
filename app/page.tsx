@@ -228,8 +228,8 @@ export default function App() {
       <ModelSelector onSelectModel={handleModelSelection} />
       {/* 27. Position input bar conditionally on whether it is the welcome screen */}
       <div
-        className={`max-w-3xl w-full fixed overflow-y-auto ${showWelcomeBack ? "top-28" : "bottom-0"
-          } mx-auto left-1/2 -translate-x-1/2`}
+        className={`max-w-3xl w-full fixed overflow-y-auto ${showWelcomeBack ? "top-28" : ""
+          } mx-auto left-1/2 -translate-x-1/2 h-[90%] overflow-y-auto`}
       >
         {showWelcomeBack && <WelcomeBack />}
         {messages.length > 0 && !showWelcomeBack
